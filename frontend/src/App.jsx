@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ticker, setTicker] = useState('');
+  const [prediction, setPrediction] = useState(null);
+
+  const handleInputChange = (event) => {
+    setTicker(event.target.value);
+  };
+
+  const getPrediction = () => {
+    // Placeholder for API call (we'll implement this later)
+    const dummyPrediction = 1; // Dummy prediction
+    setPrediction(dummyPrediction);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      <h1>Stock Prediction</h1>
+      <label htmlFor="ticker">Enter Stock Ticker:</label>
+      <input
+        type="text"
+        id="ticker"
+        name="ticker"
+        value={ticker}
+        onChange={handleInputChange}
+      />
+      <button onClick={getPrediction}>Predict</button>
+      <div id="predictionResult">
+        {prediction !== null ? (
+          <p>Prediction for {ticker}: {prediction}</p>
+        ) : (
+          <p>Enter a ticker and click 'Predict'</p>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
